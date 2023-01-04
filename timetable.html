@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta>
+        <title>時間割</title>
+        <link rel="stylesheet" href="timetable_style.css">
+    </head>
+    <body>
+        <div>
+        <p>科目追加</p>
+        <select id="select_weekday">
+        <option>曜日を選択</option>
+        <option value="Mon">月曜日</option>
+        <option value="Tue">火曜日</option>
+        <option value="Wed">水曜日</option>
+        <option value="Thu">木曜日</option>
+        <option value="Fri">金曜日</option>
+        </select>
+        <select id="select_time">
+            <option>時限を選択</option>
+            <option value="one">1限</option>
+            <option value="two">2限</option>
+            <option value="three">3限</option>
+            <option value="four">4限</option>
+            <option value="five">5限</option>
+        </select>
+        <p>科目名</p>
+        <input type="text" value="" id="object_name">
+        <p>担当教員</p>
+        <input type="text" value="" id="teacher_name">
+        <p>教室</p>
+        <input type="text" value="" id="room_name">
+        <p>色選択</p>
+        <input type="color" id="color" value="#2285E2">
+        <br>
+        <br>
+        <button id="add_button">追加</button>
+        <div>
+            <p>時間割の名前</p>
+            <input type="text" value="時間割">
+            <button>変更</button>
+            </div>   
+        </div>
+          
+        <table>
+            <tr>
+                <th></th>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+            </tr>
+            <tr>
+                <th>1</th>
+                <td id="Mon_one"></td>
+                <td id="Tue_one"></td>
+                <td id="Wed_one"></td>
+                <td id="Thu_one"></td>
+                <td id="Fri_one"></td>
+            </tr>
+            <tr>
+                <th>2</th>
+                <td id="Mon_two"></td>
+                <td id="Tue_two"></td>
+                <td id="Wed_two"></td>
+                <td id="Thu_two"></td>
+                <td id="Fri_two"></td>
+            </tr>
+            <tr>
+                <th>3</th>
+                <td id="Mon_three"></td>
+                <td id="Tue_three"></td>
+                <td id="Wed_three"></td>
+                <td id="Thu_three"></td>
+                <td id="Fri_three"></td>
+            </tr>
+            <tr>
+                <th>4</th>
+                <td id="Mon_four"></td>
+                <td id="Tue_four"></td>
+                <td id="Wed_four"></td>
+                <td id="Thu_four"></td>
+                <td id="Fri_four"></td>
+            </tr>
+            <tr>
+                <th>5</th>
+                <td id="Mon_five"></td>
+                <td id="Tue_five"></td>
+                <td id="Wed_five"></td>
+                <td id="Thu_five"></td>
+                <td id="Fri_five"></td>
+            </tr>                                                
+        </table>
+        <div>
+        <p>保存した時間割</p>
+        <div id="timetable_store">
+            <p class="timetable_name">時間割</p>
+        </div>    
+            <input type="text" value="新しい時間割" id="new_timetable_title"></input>
+            <button id="creat_timetable_button">新規作成</button>
+        </div>
+        <script src="./timetable.js"></script>
+    </body>
+</html>
