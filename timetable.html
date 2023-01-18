@@ -37,7 +37,7 @@
         <button id="add_button">追加</button>
         <div>
             <p>時間割の名前</p>
-            <input type="text" value="時間割">
+            <input type="text" value="時間割" id="table_name_change">
             <button>変更</button>
             </div>   
         </div>
@@ -95,11 +95,10 @@
         <div>
         <p>保存した時間割</p>
         <div id="timetable_store">
-            <p class="timetable_name">時間割</p>
+            <!-- <p class="timetable_name">時間割</p>  -->
         </div>    
-            <input type="text" value="新しい時間割" id="new_timetable_title"></input>
-            <button id="creat_timetable_button">新規作成</button>
-        </div>
+            <input type="text" value="時間割" id="new_timetable_title"></input>
+            <button id="creat_timetable_button">新規作成</button>        
         <script src="./timetable.js"></script>
     </body>
 </html>
