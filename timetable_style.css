@@ -13,6 +13,6 @@ td{
     height: 130px;
     width: 150px;
 }
-/*#new_timetable_title{
-
+#delete_button{
+    display: none;
 }
