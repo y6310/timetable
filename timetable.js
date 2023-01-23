@@ -90,6 +90,9 @@ function creat_timetable(){//表を作る
    new_timetable_title_p.value="timetable_name_"+(timetable_name.length-1);
     //valueに配列と同じ値をつける(時間割の名前をクリックして、切り替えてからtd追加したときの関数add_objectの引数argにthisで紐づけるため)
    //console.log(table_name_array);
+
+
+
    if(timetable_name.length==2){
  
     console.log("done");
@@ -147,7 +150,22 @@ function click_timetable_name(){//右の時間割の名前をクリックした�
     add_button.addEventListener('click',function(){add_object(arg)},false);//クリックしたらadd_object(arg)の結果を入れる
     //add_button.addEventListener('click',{name:arg, handleEvent: add_object},false);//関数add_object、引数arg
 
-}
+    
+    weekday.value="choice_day";//左側すべて空欄またはデフォルトの値にする
+    time.value="choice_time";
+    object_name.value="";
+    teacher_name.value="";
+    room_name.value="";
+    color.value="#2285E2";//デフォルトの値
+
+    weekday.disabled=false;//それぞれを編集(入力)可にする
+    time.disabled=false;
+    object_name.disabled=false;
+    teacher_name.disabled=false;
+    room_name.disabled=false;
+    color.disabled=false;
+
+};
 //timetable_name_0のときlocalstorageに空行入るけどまあ無視しよ
 
 let this_is;
@@ -162,6 +180,13 @@ function click_td(){
         teacher_name.value="";
         room_name.value="";
         color.value="#2285E2";//デフォルトの値
+
+        weekday.disabled=false;//それぞれを編集(入力)可にする
+        time.disabled=false;
+        object_name.disabled=false;
+        teacher_name.disabled=false;
+        room_name.disabled=false;
+        color.disabled=false;
 
         add_button.style.display="block";
         delete_button.style.display="none";
@@ -209,6 +234,15 @@ function click_td(){
         teacher_name.value=teacher_td;
         room_name.value=room_td;
         color.value=rgb_to_hex(rgb_10_r, rgb_10_g,rgb_10_b);
+
+        weekday.disabled=true;//それぞれを編集(入力)不可にする
+        time.disabled=true;
+        object_name.disabled=true;
+        teacher_name.disabled=true;
+        room_name.disabled=true;
+        color.disabled=true;
+
+
 
         add_button.style.display="none";//追加ボタンを消す
         delete_button.style.display="block";//削除ボタンを見えるようにする
@@ -260,7 +294,14 @@ function delete_object(delete_td_key,td_outerHTML){//削除ボタン押したと
     add_button.style.display="block";//追加ボタンを見えるようにする
     delete_button.style.display="none";//削除ボタンを消す
 
-}
+    weekday.disabled=false;//それぞれを編集(入力)可にする
+    time.disabled=false;
+    object_name.disabled=false;
+    teacher_name.disabled=false;
+    room_name.disabled=false;
+    color.disabled=false;
+
+};
 
 
 
