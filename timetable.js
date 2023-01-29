@@ -4,7 +4,7 @@ const creat_timetable_button=document.getElementById("creat_timetable_button");/
 const timetable_store=document.getElementById("timetable_store");//保存した時間割の中
 const timetable_name = document.getElementsByClassName("timetable_name");//初期値の時間割の名前
 const table_name_change = document.getElementById("table_name_change");//変更ボタンの上のテキストボックス
-const table_name_array = ["timetable_name_0"];//デフォで最初の「時間割」が配列に入っている
+let table_name_array = ["timetable_name_0"];//デフォで最初の「時間割」が配列に入っている
 let arg=table_name_array[0]//add_objectの引数デフォでtable_name_array[0]
 
 const day=["Mon","Tue","Wed","Thu","Fri"];//曜日の配列、localstorageのgetItemで使用
@@ -26,10 +26,38 @@ let choice_time_table;//左の時間割名をクリックしたときに時間�
 window.onload = onLoad;
 function onLoad()
 {//ロードしたときに実行する、保存した時間割のところにデフォルトで「時間割」を設定
+    //localStorageの容量が0のときが初回アクセスのときになるので、localStorageに何か入っているかを判断
+    let all_localStorage =Object.keys(localStorage).map(key =>{
+        return{
+            key: key,
+            value: JSON.parse(localStorage.getItem(key))
+        };
+    });
+
+    if (all_localStorage.length==0){//localStorageに何も入っていないとき=初回アクセスのとき
     creat_timetable();//新規で表をつくる
     add_button.addEventListener('click',default_add_object,false);//デフォルトで「追加」ボタンの動作をつける
     //console.log("onLoaded");//確認
-}
+    }else{//localStorageに何か入っているとき=過去にアクセスしたことがあるとき
+        //click_timetable_name();
+
+        table_name_array=JSON.parse(localStorage.getItem("timetable_name_array"));//key:timetable_name_array値:["timetable_name_0","timetable_name_1",... ]
+        for(let i=0;i<table_name_array.length;i++){
+
+            let value_getItem= JSON.parse(localStorage.getItem(table_name_array[i]));//「timetable_name_X」をキーとして「時間割」を値として取得
+            let new_timetable_title_p=document.createElement("p");//pタグ作る
+            new_timetable_title_p.innerHTML=value_getItem;
+            timetable_store.appendChild(new_timetable_title_p);
+            new_timetable_title_p.classList.add('timetable_name');
+            new_timetable_title_p.addEventListener('click',click_timetable_name,false);//新しく作った時間割にクリックイベントを設定
+            //table_name_array[timetable_name.length-1]="timetable_name_"+(timetable_name.length-1);//配列にいれる名前つける
+            //console.log(table_name_array);
+            new_timetable_title_p.value="timetable_name_"+(timetable_name.length-1);                
+        };
+        
+    };
+
+};
 
 function default_add_object(){//デフォルトでロードしてから最初に「時間割」だけが表示されていて、他の時間割が追加されていないとき
 
@@ -78,8 +106,12 @@ function add_object(arg){
 }
 
 function creat_timetable(){//表を作る
-   const new_timetable_title_input= document.getElementById("new_timetable_title");
-   const new_timetable_title_p=document.createElement("p");
+    if(localStorage.hasOwnProperty("timetable_name_array")){//"timetable_name_array"がlocalstorageに存在していたらその値を使う
+    table_name_array=[];
+    table_name_array=JSON.parse(localStorage.getItem("timetable_name_array"));
+    }; 
+   const new_timetable_title_input= document.getElementById("new_timetable_title");//追加した時間割名を入れるinputタグ
+   let new_timetable_title_p=document.createElement("p");
    new_timetable_title_p.innerHTML=new_timetable_title_input.value;
    timetable_store.appendChild(new_timetable_title_p);
    new_timetable_title_p.classList.add('timetable_name');
@@ -91,12 +123,14 @@ function creat_timetable(){//表を作る
     //valueに配列と同じ値をつける(時間割の名前をクリックして、切り替えてからtd追加したときの関数add_objectの引数argにthisで紐づけるため)
    //console.log(table_name_array);
 
+   
+   localStorage.removeItem("timetable_name_array");//前あった配列をlocalStorageから削除
+   localStorage.setItem("timetable_name_array",JSON.stringify(table_name_array));//配列を保存
+   localStorage.setItem(new_timetable_title_p.value,JSON.stringify(new_timetable_title_p.innerHTML));//key:timetable_name_0"//値:時間割
+   //一つのkeyに対して一つの時間割名だからJSONにしなくていいけど、getのときに全部JSONから戻すからJSONにしとく
 
 
-   if(timetable_name.length==2){
- 
-    console.log("done");
-   }
+
 }
 
 function click_timetable_name(){//右の時間割の名前をクリックしたとき
@@ -108,7 +142,7 @@ function click_timetable_name(){//右の時間割の名前をクリックした�
         each_td_getItem.style.backgroundColor="Gray";//#808080=Gray背景を元に戻す
     }
     //とりあえずlocalstorageのものすべて取得
-    const all_localStorage =Object.keys(localStorage).map(key =>{
+    let all_localStorage =Object.keys(localStorage).map(key =>{
         return{
             key: key,
             value: JSON.parse(localStorage.getItem(key))
