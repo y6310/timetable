@@ -4,6 +4,7 @@ const creat_timetable_button=document.getElementById("creat_timetable_button");/
 const timetable_store=document.getElementById("timetable_store");//保存した時間割の中
 const timetable_name = document.getElementsByClassName("timetable_name");//初期値の時間割の名前
 const table_name_change = document.getElementById("table_name_change");//変更ボタンの上のテキストボックス
+const change_name_button = document.getElementById("change_name_button");//変更ボタン
 let table_name_array = ["timetable_name_0"];//デフォで最初の「時間割」が配列に入っている
 let arg=table_name_array[0]//add_objectの引数デフォでtable_name_array[0]
 
@@ -134,7 +135,7 @@ function creat_timetable(){//表を作る
 }
 
 function click_timetable_name(){//右の時間割の名前をクリックしたとき
-
+    change_name_button.onclick=null;//前に時間割名をクリックしたときにつけていた時間割名変更ボタンonclickを外しておく
     ////////////////////////localstorageからgetして表に入れる部分//////////////////////////////////////
     for (let each_td_getItem of td){//td(配列)のそれぞれの値をeach_tdに代入
         //console.log(each_td);
@@ -198,6 +199,10 @@ function click_timetable_name(){//右の時間割の名前をクリックした�
     teacher_name.disabled=false;
     room_name.disabled=false;
     color.disabled=false;
+
+    let this_is_2=this
+    console.log(this_is_2);//クリックした時間割<p class="timetable_name">時間割</p>
+    change_name_button.onclick=function(){change_name_button_click(this_is_2,arg)}//時間割名変更ボタンクリックしたときに変更させる
 
 };
 //timetable_name_0のときlocalstorageに空行入るけどまあ無視しよ
@@ -336,6 +341,15 @@ function delete_object(delete_td_key,td_outerHTML){//削除ボタン押したと
     color.disabled=false;
 
 };
+
+function change_name_button_click(clicked_table_name,key_arg){
+    console.log(table_name_change);
+    console.log(clicked_table_name);
+    clicked_table_name.innerHTML=table_name_change.value;
+    localStorage.removeItem(key_arg);
+    localStorage.setItem(key_arg,JSON.stringify(table_name_change.value));
+}
+
 
 
 
