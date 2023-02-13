@@ -38,10 +38,13 @@ function onLoad()
     if (all_localStorage.length==0){//localStorageに何も入っていないとき=初回アクセスのとき
     creat_timetable();//新規で表をつくる
     add_button.addEventListener('click',default_add_object,false);//デフォルトで「追加」ボタンの動作をつける
+    //時間割名変更のボタンのイベントリスナーを一番上の時間割名のところにつける
+    change_name_button.onclick=function(){change_name_button_click(document.getElementsByClassName("timetable_name")[0],table_name_array[0])};
+    
+    //click_timetable_name()
     //console.log("onLoaded");//確認
     }else{//localStorageに何か入っているとき=過去にアクセスしたことがあるとき
         //click_timetable_name();
-
         table_name_array=JSON.parse(localStorage.getItem("timetable_name_array"));//key:timetable_name_array値:["timetable_name_0","timetable_name_1",... ]
         for(let i=0;i<table_name_array.length;i++){
 
@@ -53,9 +56,12 @@ function onLoad()
             new_timetable_title_p.addEventListener('click',click_timetable_name,false);//新しく作った時間割にクリックイベントを設定
             //table_name_array[timetable_name.length-1]="timetable_name_"+(timetable_name.length-1);//配列にいれる名前つける
             //console.log(table_name_array);
-            new_timetable_title_p.value="timetable_name_"+(timetable_name.length-1);                
+            new_timetable_title_p.value="timetable_name_"+(timetable_name.length-1);               
         };
-        
+
+        //時間割名変更のボタンのイベントリスナーを一番上の時間割名のところにつける
+        change_name_button.onclick=function(){change_name_button_click(document.getElementsByClassName("timetable_name")[0],table_name_array[0])};
+
     };
 
 };
@@ -342,7 +348,7 @@ function delete_object(delete_td_key,td_outerHTML){//削除ボタン押したと
 
 };
 
-function change_name_button_click(clicked_table_name,key_arg){
+function change_name_button_click(clicked_table_name,key_arg){//時間割名の変更ボタン押したときの処理
     console.log(table_name_change);
     console.log(clicked_table_name);
     clicked_table_name.innerHTML=table_name_change.value;
