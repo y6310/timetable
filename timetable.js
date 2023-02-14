@@ -28,6 +28,11 @@ window.onload = onLoad;
 function onLoad()
 {//ロードしたときに実行する、保存した時間割のところにデフォルトで「時間割」を設定
     //localStorageの容量が0のときが初回アクセスのときになるので、localStorageに何か入っているかを判断
+
+    for (let each_td of td){//td(配列)のそれぞれの値にtdがクリックされたときのイベントを設定する
+        each_td.addEventListener('click',click_td,false);
+    };
+
     let all_localStorage =Object.keys(localStorage).map(key =>{
         return{
             key: key,
@@ -59,8 +64,66 @@ function onLoad()
             new_timetable_title_p.value="timetable_name_"+(timetable_name.length-1);               
         };
 
-        //時間割名変更のボタンのイベントリスナーを一番上の時間割名のところにつける
-        change_name_button.onclick=function(){change_name_button_click(document.getElementsByClassName("timetable_name")[0],table_name_array[0])};
+        //関数click_timetable_nameで一番上の時間割名をクリックしたあとの処理をクリックしたとして行う。
+        change_name_button.onclick=null;//前に時間割名をクリックしたときにつけていた時間割名変更ボタンonclickを外しておく
+        ////////////////////////localstorageからgetして表に入れる部分//////////////////////////////////////
+        for (let each_td_getItem of td){//td(配列)のそれぞれの値をeach_tdに代入
+            //console.log(each_td);
+            each_td_getItem.innerHTML="";//いったんtdのinnerHTMLを空にしてからlocalStorageからget
+            each_td_getItem.style.backgroundColor="Gray";//#808080=Gray背景を元に戻す
+        }
+        //とりあえずlocalstorageのものすべて取得
+        let all_localStorage =Object.keys(localStorage).map(key =>{
+            return{
+                key: key,
+                value: JSON.parse(localStorage.getItem(key))
+            };
+        });
+        //console.log(all_localStorage);
+        for (let i=0;i<all_localStorage.length;i++){
+            choice_time_table=arg;//クリックした時間割を保持timetable_name_Xの形
+            let key_getItem=all_localStorage[i].key;//timetable_name_0_Mon_twoの形
+            if(key_getItem.indexOf(arg)==0){//this.value=timetable_name_Xから始まるkeyをすべて取得
+                for(let j=0;j<day.length;j++){//どの曜日が入っているかを見る
+                    if(key_getItem.indexOf(day[j])> -1){//timetable_name_0_Mon_twoを０文字目から調べて、曜日の文字="Mon"があったとき
+                        console.log(key_getItem.indexOf(day[j]));//曜日の単語が入っている部分のindexを調べる.timetable_name_0_Mon_twoなら17
+                        let dayname_start=key_getItem.indexOf(day[j]);//timetable_name_0_Mon_twoなら17
+                        let table_id_getItem = document.getElementById(key_getItem.substring(dayname_start));//key_getItem.substring(dayname_start)で曜日以降の文字列を取得.timetable_name_0_Mon_twoならMon_two←これがそのままtdのidになる
+                        console.log(table_id_getItem);
+                        table_id_getItem.innerHTML="<p>"+all_localStorage[i].value.object+"</p>"+"<p>"+all_localStorage[i].value.teacher+"</p>"+"<p>"+all_localStorage[i].value.room+"</p>";//表に入れる
+                        table_id_getItem.style.backgroundColor=all_localStorage[i].value.color;//表のtdの色変える styleだとrgb(rr,gg,bb)で入る
+                        color_td_16=all_localStorage[i].value.color;//16進数の#rrggbbで保存
+                    };
+                };
+            };
+        };
+        ////////////////////////////localstorageからget終わり//////////////////////////////////////////
+    
+        add_button.removeEventListener('click',default_add_object,false);//最初のonloadで付けたイベントリスナーは重複して動作するので切っておく
+        console.log("done");
+        //console.log(this)
+        table_name_change.value = document.getElementsByClassName("timetable_name")[0].innerHTML;
+        //左下の時間割の名前の変更のところ、document.getElementsByClassName("timetable_name")[0].innerHTMLは「時間割」
+        console.log(arg)//argはtimetable_name_0
+        add_button.addEventListener('click',function(){add_object(arg)},false);//クリックしたらadd_object(arg)の結果を入れる
+        //add_button.addEventListener('click',{name:arg, handleEvent: add_object},false);//関数add_object、引数arg
+    
+        weekday.value="choice_day";//左側すべて空欄またはデフォルトの値にする
+        time.value="choice_time";
+        object_name.value="";
+        teacher_name.value="";
+        room_name.value="";
+        color.value="#2285E2";//デフォルトの値
+    
+        weekday.disabled=false;//それぞれを編集(入力)可にする
+        time.disabled=false;
+        object_name.disabled=false;
+        teacher_name.disabled=false;
+        room_name.disabled=false;
+        color.disabled=false;
+
+        //時間割名変更ボタンクリックしたときに変更させる
+        change_name_button.onclick=function(){change_name_button_click(document.getElementsByClassName("timetable_name")[0],arg)};
 
     };
 
@@ -85,7 +148,7 @@ function default_add_object(){//デフォルトでロードしてから最初に
         color:color.value
     }
     localStorage.setItem(key,JSON.stringify(localStorage_list));
-    //localstorageにいれる分かく
+
 }
 
 function add_object(arg){
@@ -295,7 +358,7 @@ function click_td(){
         //this_is=this;
         //console.log(this_is);
 
-        let delete_td_key=arg+"_"+this.id;//消去するtdのlocalStorageを消去するためにkeyをつくる this_is.id="Fri_three"の形
+        let delete_td_key=arg+"_"+this.id;//消去するtdのlocalStorageを消去するためにkeyをつくる this.id="Fri_three"の形
         console.log(arg);//timetable_name_Xの形
         console.log(delete_td_key);//timetable_name_1_Tue_fourの形
         let td_outerHTML=this;
@@ -304,6 +367,7 @@ function click_td(){
 };
 
 for (let each_td of td){//td(配列)のそれぞれの値にtdがクリックされたときのイベントを設定する
+    console.log("donedone");
     each_td.addEventListener('click',click_td,false);
 };
 
