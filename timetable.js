@@ -5,6 +5,7 @@ const timetable_store=document.getElementById("timetable_store");//保存した�
 const timetable_name = document.getElementsByClassName("timetable_name");//初期値の時間割の名前
 const table_name_change = document.getElementById("table_name_change");//変更ボタンの上のテキストボックス
 const change_name_button = document.getElementById("change_name_button");//変更ボタン
+const reset_button = document.getElementById("reset_button");//リセットボタン
 let table_name_array = ["timetable_name_0"];//デフォで最初の「時間割」が配列に入っている
 let arg=table_name_array[0]//add_objectの引数デフォでtable_name_array[0]
 
@@ -420,7 +421,22 @@ function change_name_button_click(clicked_table_name,key_arg){//時間割名の�
     localStorage.setItem(key_arg,JSON.stringify(table_name_change.value));
 }
 
+function reset(){
+    if(confirm("すべての時間割を削除します。一度削除すると復元できません。よろしいですか？")){//アラートを表示
+        localStorage.clear()//localstorageを全部削除
+        for (let each_td_getItem of td){//td(配列)のそれぞれの値をeach_tdに代入
+            //console.log(each_td);
+            each_td_getItem.innerHTML="";//tdのinnerHTMLを空に
+            each_td_getItem.style.backgroundColor="Gray";//#808080=Gray背景を元に戻す
+        }
 
+        for(let i=0;i<table_name_array.length-1;i++){//左上の時間割表示を消す、一番上は残す
+            document.getElementsByClassName("timetable_name")[i+1].innerHTML="";
+        }
+    }
+}
+
+reset_button.addEventListener('click',reset,false);
 
 
 //add_button.addEventListener('click',{name:arg, handleEvent: add_object},false);//関数add_object、引数arg
