@@ -1,5 +1,7 @@
 body{
     display: flex;
+    background-color: #F0F4C3;
+    
 }
 table,th,td{
     border: 1px solid;
@@ -13,6 +15,133 @@ td{
     height: 110px;
     width: 150px;
 }
+
+.button{
+    color: #fff;
+    background-color: #FF8A65;
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.5;
+    position: relative;
+    display: inline-block;
+    padding: 0.5rem 2.5rem;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    color: #212529;
+    border-radius: 0.5rem;
+    border:none;
+      
+}
+.button:hover{
+    color: #FF8A65;
+    background: #90A4AE;
+}
+
+
 #delete_button{
     display: none;
+}
+
+p{
+    font-size: 1.3rem;
+    color: black;
+    margin: 5px;
+}
+
+
+#select_objects{
+    display: flex;
+}
+
+#textboxes{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.select_div {
+    position: relative;
+    /*Don't really need this just for demo styling*/    
+    float: left;
+    min-width: 150px;
+    margin: 5px 5px;
+}
+ 
+.select_div:after {
+    content: '<>';
+    font: 17px "Consolas", monospace;
+    color: #333;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+    right: 11px;
+    /*Adjust for position however you want*/
+
+    top: 18px;
+    padding: 0 0 2px;
+    border-bottom: 1px solid #999;
+    /*left line */
+
+    position: absolute;
+    pointer-events: none;
+}
+
+.select_div select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* Add some styling */
+
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    height: 50px;
+    float: right;
+    margin: 5px 0px;
+    padding: 0px 10px;
+    font-size: 16px;
+    line-height: 1.75;
+    color: #333;
+    background-color: #ffffff;
+    background-image: none;
+    border: 1px solid #cccccc;
+    -ms-word-break: normal;
+    word-break: normal;
+}
+
+.textbox ,#table_name_change{
+	position: relative;
+	width: 200px;
+    height: 50px;
+	margin: 10px 1%;
+}
+
+.textbox input[type=text] {
+	font: 15px/24px sans-serif;
+	box-sizing: border-box;
+	width: 100%;
+	margin: 8px 0;
+	padding: 0.3em;
+	transition: 0.3s;
+	border: 1px solid #1b2538;
+	border-radius: 4px;
+	outline: none;
+}
+
+.textbox input[type=text]:focus {
+	border-color: #da3c41;
+}
+
+.textbox input[type=text] {
+	padding-left: 40px;
 }

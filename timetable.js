@@ -71,7 +71,7 @@ function onLoad()
         for (let each_td_getItem of td){//td(配列)のそれぞれの値をeach_tdに代入
             //console.log(each_td);
             each_td_getItem.innerHTML="";//いったんtdのinnerHTMLを空にしてからlocalStorageからget
-            each_td_getItem.style.backgroundColor="Gray";//#808080=Gray背景を元に戻す
+            each_td_getItem.style.backgroundColor="#90A4AE";//#90A4AE背景を元に戻す
         }
         //とりあえずlocalstorageのものすべて取得
         let all_localStorage =Object.keys(localStorage).map(key =>{
@@ -210,7 +210,7 @@ function click_timetable_name(){//右の時間割の名前をクリックした�
     for (let each_td_getItem of td){//td(配列)のそれぞれの値をeach_tdに代入
         //console.log(each_td);
         each_td_getItem.innerHTML="";//いったんtdのinnerHTMLを空にしてからlocalStorageからget
-        each_td_getItem.style.backgroundColor="Gray";//#808080=Gray背景を元に戻す
+        each_td_getItem.style.backgroundColor="#90A4AE";//#90A4AE背景を元に戻す
     }
     //とりあえずlocalstorageのものすべて取得
     let all_localStorage =Object.keys(localStorage).map(key =>{
@@ -398,7 +398,7 @@ function delete_object(delete_td_key,td_outerHTML){//削除ボタン押したと
     room_name.value="";
     color.value="#2285E2";//デフォルトの値
 
-    td_outerHTML.style.backgroundColor="Gray";//tdの背景をデフォに戻す
+    td_outerHTML.style.backgroundColor="#90A4AE";//tdの背景をデフォに戻す
     console.log(td_outerHTML.innerHTML);
     td_outerHTML.innerHTML="";//tdのinnerHTML消す
     add_button.style.display="block";//追加ボタンを見えるようにする
@@ -427,7 +427,7 @@ function reset(){
         for (let each_td_getItem of td){//td(配列)のそれぞれの値をeach_tdに代入
             //console.log(each_td);
             each_td_getItem.innerHTML="";//tdのinnerHTMLを空に
-            each_td_getItem.style.backgroundColor="Gray";//#808080=Gray背景を元に戻す
+            each_td_getItem.style.backgroundColor="#90A4AE";//#90A4AE背景を元に戻す
         }
 
         for(let i=0;i<table_name_array.length-1;i++){//左上の時間割表示を消す、一番上は残す
