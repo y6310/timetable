@@ -297,7 +297,7 @@ function click_td(){
         room_name.disabled=false;
         color.disabled=false;
 
-        add_button.style.display="block";
+        add_button.style.display="block"
         delete_button.style.display="none";
 
     }

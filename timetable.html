@@ -7,7 +7,7 @@
     </head>
     <body>
         <div id="left">
-            <p>科目追加</p>
+            <p class="title">科目追加</p>
             <div id="select_objects">                
                 <div class="select_div">
                     <select id="select_weekday">
@@ -27,7 +27,7 @@
                         <option value="three">3限</option>
                         <option value="four">4限</option>
                         <option value="five">5限</option>
-                        <option value="five">6限</option>
+                        <option value="six">6限</option>
                     </select>
                 </div>
             </div>
@@ -46,7 +46,7 @@
             <br>
             <br>
             <div id="timetable_name_area">
-                <p>時間割の名前</p>
+                <p class="title">時間割の名前</p>
                 <input type="text" value="時間割" id="table_name_change">
                 <button id="change_name_button" class="button">変更</button>
             </div>  
@@ -111,7 +111,7 @@
             </tr>                                                 
         </table>
         <div>
-        <p>保存した時間割</p>
+        <p class="title">保存した時間割</p>
         <div id="timetable_store">
             <!-- <p class="timetable_name">時間割</p>  -->
         </div>    
@@ -120,7 +120,7 @@
             <button id="creat_timetable_button" class="button">新規作成</button>
             <br>
             <br>
-            <button id="reset_button" class="button">すべての時間割を削除</button>        
+            <button id="reset_button" class="button">すべての時間割<br>削除</button>        
         <script src="./timetable.js"></script>
     </body>
 </html>

@@ -1,6 +1,7 @@
 body{
     display: flex;
     background-color: #F0F4C3;
+    font-family: "游ゴシック", "YuGothic", "メイリオ", meiryo, sans-serif;
     
 }
 table,th,td{
@@ -11,11 +12,19 @@ table{
 
 }
 td{
-    background-color:#808080;
+    background-color:#90A4AE;
     height: 110px;
     width: 150px;
+    text-align: center;
 }
-
+td p{
+    font-size: 18px;
+}
+#timetable_store> p:hover{
+    color: #FF8A65;
+    cursor: pointer;
+    cursor: hand;
+}
 .button{
     color: #fff;
     background-color: #FF8A65;
@@ -39,7 +48,7 @@ td{
     color: #212529;
     border-radius: 0.5rem;
     border:none;
-      
+    font-family: "游ゴシック", "YuGothic", "メイリオ", meiryo, sans-serif;  
 }
 .button:hover{
     color: #FF8A65;
@@ -119,7 +128,7 @@ p{
     word-break: normal;
 }
 
-.textbox ,#table_name_change{
+.textbox ,#table_name_change,#new_timetable_title{
 	position: relative;
 	width: 200px;
     height: 50px;
@@ -144,4 +153,8 @@ p{
 
 .textbox input[type=text] {
 	padding-left: 40px;
+}
+
+.title{
+    border-bottom: double 6px #FF8A65;
 }
