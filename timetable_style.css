@@ -2,7 +2,6 @@ body{
     display: flex;
     background-color: #F0F4C3;
     font-family: "游ゴシック", "YuGothic", "メイリオ", meiryo, sans-serif;
-    
 }
 table,th,td{
     border: 1px solid;
